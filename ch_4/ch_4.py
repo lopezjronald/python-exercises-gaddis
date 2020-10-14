@@ -1,5 +1,6 @@
-for row in range(6):
-    for column in range(row):
-        print("-", end="")
-    print("*", end='')
+num_dictionary = {}
+nums = [1, 1, 1, 2, 3, 4]
+for num in nums:
+    num_dictionary[num]= nums.count(num)
+print(num_dictionary)
 
