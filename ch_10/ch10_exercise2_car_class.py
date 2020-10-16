@@ -66,13 +66,51 @@ class Car:
         self.__speed -= 5
 
 
-import random
+def main():
+    car_make = input("What is the car make: ")
+    car_model = input("What is the car model: ")
+    car_year = input(f"What is the {car_make} year: ")
+    car_speed = None
+    while True:
+        try:
+            car_speed = float(input("What is the car speed: "))
+            break
+        except ValueError:
+            print("Invalid entry")
+            continue
+    new_car = Car(car_make, car_model, car_year, car_speed)
+    print(new_car)
+    speeding = True
+    while speeding:
+        accelerate_or_brake(new_car)
+        while True:
+            continue_speeding = input("Would you like to continue ('y' for yes 'n' for no)\n")
+            if continue_speeding.lower() == 'y':
+                break
+            elif continue_speeding.lower() == 'n':
+                speeding = False
+                break
+            else:
+                print("Invalid entry")
 
-mercedes = Car('Mercedes', 'Benz', 2020, 200)
-for i in range(20):
-    speed_gauge = random.randint(0, 1)
-    if speed_gauge == 0:
-        mercedes.brake()
-    else:
-        mercedes.accelerate()
-    print(f"{speed_gauge} -- {mercedes.get_model()}: {mercedes.get_speed()}mpg")
+
+def accelerate_or_brake(car_object):
+    while True:
+        choice = input("1: Accelerate\n2: Brake\n")
+        try:
+            choice = int(choice)
+        except ValueError:
+            print("Invalid entry")
+            continue
+        if choice == 1:
+            car_object.accelerate()
+        elif choice == 2:
+            car_object.brake()
+        else:
+            print("Invalid Entry")
+            continue
+        print(f"Car Speed: {car_object.get_speed()}")
+        break
+
+
+main()
